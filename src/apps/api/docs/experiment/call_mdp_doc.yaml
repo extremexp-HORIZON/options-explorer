@@ -1,0 +1,117 @@
+post:
+  summary: "Call MDP"
+  deprecated: false
+  description: "This endpoint accepts constraints related to experiments, filters experiences based on the provided criteria, and then processes them using a Markov Decision Process (MDP) model."
+  tags: ["Experiment"]
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            domain:
+              type: string
+              description: "The domain or field of the experiment."
+              example: "manufacturing"
+            intent:
+              type: string
+              description: "The purpose or intent of the experiment."
+              example: "anomaly detection"
+            algorithm:
+              type: string
+              description: "The algorithm used in the experiment."
+              example: "RNN"
+            method:
+              type: string
+              description: "The method used in the experiment (optional)."
+              nullable: true
+              example: null
+            hard_constraints:
+              type: array
+              description: "A list of hard constraints for the experiment."
+              items:
+                type: object
+                properties:
+                  description_type_id:
+                    type: integer
+                    description: "ID of the description type."
+                    example: 35
+                  value:
+                    type: string
+                    description: "The value for the hard constraint."
+                    example: "0.98"
+                  comparison_type:
+                    type: string
+                    description: "The type of comparison (e.g., numerical)."
+                    example: "numerical"
+                  operator:
+                    type: string
+                    description: "The comparison operator (e.g., >=)."
+                    example: ">="
+              example: []
+            soft_constraints:
+              type: array
+              description: "A list of soft constraints for the experiment."
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: "The name of the constraint."
+                    example: "pu"
+                  type:
+                    type: string
+                    description: "The type of the constraint (e.g., categorical, numerical)."
+                    example: "categorical"
+                  value:
+                    type: string
+                    description: "The value of the constraint."
+                    example: "GPU"
+                  min:
+                    type: number
+                    description: "The minimum value for numerical constraints."
+                    nullable: true
+                    example: null
+                  max:
+                    type: number
+                    description: "The maximum value for numerical constraints."
+                    nullable: true
+                    example: 16
+              required:
+                - name
+                - type
+                - value
+              example:
+                - name: "pu"
+                  type: "categorical"
+                  value: "GPU"
+                - name: "ram"
+                  type: "numerical"
+                  min: null
+                  max: 16
+                - name: "accuracy"
+                  type: "numerical"
+                  min: 0.9
+                  max: null
+                - name: "precision"
+                  type: "numerical"
+                  min: 0.9
+                  max: null
+          required:
+            - domain
+            - intent
+            - algorithm
+            - hard_constraints
+            - soft_constraints
+  responses:
+    '200':
+      description: "The request was successful and the results are returned."
+    '400':
+      description: "Bad Request. Required fields are missing or invalid."
+    '404':
+      description: "No experiences found with the given constraints."
+    '500':
+      description: "Internal server error."
+  security:
+    - bearer: []

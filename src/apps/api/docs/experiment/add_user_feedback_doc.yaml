@@ -1,0 +1,37 @@
+post:
+  summary: "Add User Feedback"
+  deprecated: false
+  description: "Allows users to provide feedback for an experiment by rating it."
+  tags: ["Experiment"]
+  parameters: []
+  requestBody:
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          type: object
+          properties:
+            experiment_id:
+              type: string
+              example: '157'
+            rating:
+              type: string
+              example: '8'
+          required:
+            - experiment_id
+            - rating
+  responses:
+    '200':
+      description: "Successfully added user feedback."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: {}
+    '400':
+      description: "Bad request. Missing experiment ID or rating."
+    '405':
+      description: "Method Not Allowed."
+    '500':
+      description: "Internal server error."
+  security:
+    - bearer: []

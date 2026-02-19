@@ -1,0 +1,49 @@
+get:
+  summary: Get Experiment Description Types
+  deprecated: false
+  description: >
+    This endpoint allows authenticated users to retrieve all available experiment description types. 
+    The response includes a list of all description types, including their names, types, 
+    and description type IDs. If no description types are found or the user is not authenticated, 
+    an error response will be returned.
+  tags: ["Experiment"]
+  parameters: []
+  responses:
+    '200':
+      description: 'Successfully retrieved the list of experiment description types.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "success"
+              status_code:
+                type: integer
+                example: 200
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description_type_id:
+                      type: integer
+                      example: 22
+                      description: "Unique identifier for the description type."
+                    name:
+                      type: string
+                      example: "layers"
+                      description: "The name of the description type."
+                    type:
+                      type: string
+                      example: "categorical"
+                      description: "The type of description (e.g., categorical, numerical)."
+    '401':
+      description: 'Unauthorized - Invalid or missing authentication token.'
+    '404':
+      description: 'Not Found - No description types found.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security:
+    - bearer: []

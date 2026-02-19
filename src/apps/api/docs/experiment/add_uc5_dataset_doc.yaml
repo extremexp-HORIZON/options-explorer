@@ -1,0 +1,40 @@
+post:
+  summary: "Add UC5 Dataset"
+  deprecated: false
+  description: "This endpoint allows users to upload a UC5 dataset in CSV format. The data is then processed, converted to JSON, and added as experiments."
+  tags: ["Experiment"]
+  parameters: []
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              type: string
+              format: binary
+              description: "The file to upload in CSV format."
+            add_non_existing_description_types:
+              type: boolean
+              description: "Flag to indicate whether to add non-existing description types found in the dataset."
+          required:
+            - file
+  responses:
+    '200':
+      description: "The dataset was uploaded and the experiences were added successfully."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "5 experiences added successfully"
+    '400':
+      description: "Bad Request. The file is missing or invalid (e.g., wrong file type)."
+    '405':
+      description: "Method Not Allowed. The HTTP method used is not supported."
+    '500':
+      description: "Internal server error."
+  security:
+    - bearer: []

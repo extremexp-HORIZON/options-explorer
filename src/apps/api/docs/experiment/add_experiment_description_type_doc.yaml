@@ -1,0 +1,66 @@
+post:
+  summary: Add Experiment Description Type
+  deprecated: false
+  description: >
+    This endpoint allows authenticated users to add a new experiment description type. 
+    Users must provide the name and, type for the description type. 
+    The request should be sent using form-data. The `name` represents the type of description, 
+    `type` represents the description's format (e.g., numerical, text). A successful addition returns 
+    a success response, while an unauthorized request results in a 401 error.
+  tags: ["Experiment"]
+  parameters: []
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: "training_time"
+              description: "The name of the description type (e.g., training time)."
+            type:
+              type: string
+              example: "numerical"
+              description: "The type of the description (e.g., numerical, text)."
+          required:
+            - name
+            - type
+  responses:
+    '200':
+      description: 'Successfully added the experiment description type.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "Successfully added the experiment description type."
+              status_code:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  description_type_id:
+                    type: integer
+                    example: 22
+                    description: "Unique identifier for the description type."
+                  name:
+                    type: string
+                    example: "layers"
+                    description: "The name of the description type."
+                  type:
+                    type: string
+                    example: "categorical"
+                    description: "The type of description (e.g., categorical, numerical)."
+
+    '400':
+      description: 'Bad Request - Missing or invalid input.'
+    '401':
+      description: 'Unauthorized - Missing or invalid authentication token.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security:
+    - bearer: []

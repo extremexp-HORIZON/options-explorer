@@ -1,0 +1,73 @@
+post:
+  summary: Register a New User
+  deprecated: false
+  description: >
+    This endpoint allows users to create a new account by providing their personal details, email, password, and profile picture. 
+    The password is hashed using MD5 with a salt before storing it. If the registration is successful, the user’s information is stored, 
+    and a success response is returned. If the provided profile picture is missing or not in an allowed format (PNG, JPG, JPEG), 
+    the request will be rejected with a 400 Bad Request error. For security reasons, it is recommended to use a stronger hashing 
+    algorithm such as bcrypt. Ensure that sensitive information is securely handled.
+  tags: ["User"]
+  parameters: []
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: "Mohammad"
+              description: "The first name of the user."
+            lastname:
+              type: string
+              example: "Pezeshki"
+              description: "The last name of the user."
+            email:
+              type: string
+              example: "mohammad@gmail.com"
+              description: "The user's unique email address."
+            password:
+              type: string
+              example: "123456"
+              description: "The user's password (before hashing)."
+            profile_pic:
+              type: string
+              format: binary
+              description: "Profile picture file (PNG, JPG, JPEG only)."
+            address:
+              type: string
+              example: "Via San Marco"
+              description: "The user's residential address."
+            birth_date:
+              type: string
+              example: "1994-12-03"
+              description: "User's birth date (YYYY-MM-DD format)."
+            educational_level:
+              type: string
+              example: "Bachelor's Degree"
+              description: "The user's highest educational level."
+            educational_field:
+              type: string
+              example: "Computer Science"
+              description: "The field of study for the user's highest degree."
+          required:
+            - name
+            - lastname
+            - email
+            - password
+  responses:
+    '200':
+      description: 'Registration successful. User details stored.'
+    '400':
+      description: 'Bad Request - Invalid input or unsupported profile picture format.'
+    '401':
+      description: 'Unauthorized - Registration failed due to invalid credentials.'
+    '404':
+      description: 'Not Found - The requested resource does not exist.'
+    '405':
+      description: 'Method Not Allowed - Only POST is supported.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security: []

@@ -1,0 +1,44 @@
+get:
+  summary: Get Experiment Domains
+  deprecated: false
+  description: >
+    This endpoint allows authenticated users to retrieve all available experiment domains.
+    The response includes each domain and the number of experiments associated with it.
+    If no domains are found or the user is not authenticated, an error response will be returned.
+  tags: ["Experiment"]
+  parameters: []
+  responses:
+    '200':
+      description: 'Successfully retrieved the list of experiment domains.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "success"
+              status_code:
+                type: integer
+                example: 200
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    domain:
+                      type: string
+                      example: "robotics"
+                      description: "The domain of experiments."
+                    experiment_count:
+                      type: integer
+                      example: 5
+                      description: "Number of experiments in this domain."
+    '401':
+      description: 'Unauthorized - Invalid or missing authentication token.'
+    '404':
+      description: 'Not Found - No domains found.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security:
+    - bearer: []

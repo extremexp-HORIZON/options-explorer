@@ -1,0 +1,43 @@
+post:
+  summary: "Get Selected Experiments"
+  deprecated: false
+  description: "Fetch selected experiments by their IDs."
+  tags: ["Experiment"]
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            experiment_ids:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+          required:
+            - experiment_ids
+        example:
+          experiment_ids:
+            - id: 156
+            - id: 157
+  responses:
+    '200':
+      description: "Successfully fetched the selected experiments."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: {}
+    '404':
+      description: "Not Found. Missing experiment IDs or no experiments found."
+    '405':
+      description: "Method Not Allowed."
+    '500':
+      description: "Internal server error."
+  security:
+    - bearer: []

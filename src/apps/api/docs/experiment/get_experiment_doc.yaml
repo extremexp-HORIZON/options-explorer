@@ -1,0 +1,76 @@
+get:
+  summary: Get Experiment
+  deprecated: false
+  description: >
+    This endpoint allows authenticated users to retrieve an experiment by its unique ID. 
+    The `experiment_id` is passed as a query parameter. If the experiment is found, 
+    its details are returned in the response. If the experiment cannot be found, 
+    a 404 Not Found error is returned. The request must include a valid JWT access token in the Authorization header.
+  tags: ["Experiment"]
+  parameters:
+    - name: experiment_id
+      in: query
+      description: "The unique identifier of the experiment to be retrieved."
+      required: true
+      example: '147'
+      schema:
+        type: string
+    - name: Content-Type
+      in: header
+      description: "The media type of the request body. Must be 'application/json'."
+      required: true
+      schema:
+        type: string
+        example: application/json
+  responses:
+    '200':
+      description: 'Successfully retrieved the experiment details.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              experiment_id:
+                type: string
+                example: '147'
+              title:
+                type: string
+                example: 'Anomaly Detection on Medical Data'
+              domain:
+                type: string
+                example: 'Healthcare'
+              intent:
+                type: string
+                example: 'Anomaly detection'
+              algorithm:
+                type: string
+                example: 'CNN'
+              method:
+                type: string
+                example: 'Binary Classification'
+              model:
+                type: string
+                example: 'CNN_1'
+              descriptions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description_type_id:
+                      type: string
+                      example: '3'
+                    value:
+                      type: string
+                      example: 'Anomaly detection model for heart disease prediction.'
+    '400':
+      description: 'Bad Request - Invalid input parameters.'
+    '401':
+      description: 'Unauthorized - Missing or invalid authentication token.'
+    '404':
+      description: 'Not Found - The experiment with the specified ID does not exist.'
+    '405':
+      description: 'Method Not Allowed - Only GET is supported.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security:
+    - bearer: []

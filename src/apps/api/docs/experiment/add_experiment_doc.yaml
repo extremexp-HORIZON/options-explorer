@@ -1,0 +1,86 @@
+post:
+  summary: Add Experiment
+  deprecated: false
+  description: >
+    This endpoint allows authenticated users to add a new experiment. 
+    The user must provide experiment details, including the title, domain, intent, algorithm, method, model, 
+    and a list of descriptions. The request must be sent in JSON format and include a valid JWT access token 
+    in the Authorization header. If successful, the experiment is stored and a success response is returned. 
+    If authentication fails, a 401 Unauthorized response is returned.
+  tags: ["Experiment"]
+  parameters:
+    - name: Content-Type
+      in: header
+      description: "The media type of the request body. Must be 'application/json'."
+      required: true
+      schema:
+        type: string
+        example: application/json
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            title:
+              type: string
+              example: "Anomaly Detection on Medical Data"
+              description: "Title of the experiment."
+            domain:
+              type: string
+              example: "Manufacturing"
+              description: "The domain to which the experiment belongs."
+            intent:
+              type: string
+              example: "Anomaly Detection"
+              description: "The purpose of the experiment."
+            algorithm:
+              type: string
+              example: "CNN"
+              description: "The algorithm used in the experiment."
+            method:
+              type: string
+              example: "Binary Classification"
+              description: "The method applied in the experiment."
+            model:
+              type: string
+              example: "CNN_1"
+              description: "The model used in the experiment."
+            descriptions:
+              type: array
+              description: "A list of descriptions related to the experiment."
+              items:
+                type: object
+                properties:
+                  description_type_id:
+                    type: string
+                    example: "3"
+                    description: "ID representing the type of description."
+                  value:
+                    type: string
+                    example: "8"
+                    description: "Description value."
+          required:
+            - title
+            - domain
+            - intent
+            - algorithm
+            - method
+            - model
+            - descriptions
+  responses:
+    '200':
+      description: 'Experiment added successfully.'
+    '400':
+      description: 'Bad Request - Invalid input data.'
+    '401':
+      description: 'Unauthorized - Invalid or missing authentication token.'
+    '404':
+      description: 'Not Found - The requested resource does not exist.'
+    '405':
+      description: 'Method Not Allowed - Only POST is supported.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security:
+    - bearer: []

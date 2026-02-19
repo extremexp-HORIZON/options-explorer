@@ -1,0 +1,105 @@
+# services:
+#   age:
+#     image: apache/age:latest
+#     container_name: age
+#     environment:
+#       - POSTGRES_USER=${DB_USER}
+#       - POSTGRES_PASSWORD=${DB_PASSWORD}
+#       - POSTGRES_DB=${DB_NAME}
+#       - POSTGRES_PORT=${DB_PORT}
+#     ports:
+#       - "${DB_PORT}:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     restart: always
+#   app:
+#     build: .
+#     container_name: python_extreme_xp
+#     depends_on:
+#       - age 
+#     environment:
+#       - DB_HOST=age
+#       - DB_USER=${DB_USER}
+#       - DB_PASSWORD=${DB_PASSWORD}
+#       - DB_NAME=${DB_NAME}
+#       - DB_PORT=${DB_PORT}
+#       - PYTHONUNBUFFERED=1
+#       - HASH_SAULT=${HASH_SAULT}
+#       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+#       - DATASET_FOLDER=${DATASET_FOLDER}
+#       - PROFILE_FOLDER=${PROFILE_FOLDER}
+#     ports:
+#       - "8000:8000"
+#     volumes:
+#       - .:/app
+#     restart: always
+
+# volumes:
+#   postgres_data:
+services:
+  age:
+    image: apache/age:latest
+    container_name: age
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PORT: ${DB_PORT:-5432}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build:
+      context: .                 # project root
+      dockerfile: src/apps/Dockerfile
+    container_name: extreme_xp_backend
+    depends_on:
+      - age
+
+    # If you have a .env at root, use it:
+    env_file:
+      - .env
+
+    environment:
+      # Make backend talk to DB container, not localhost
+      DB_HOST: age
+      DB_PORT: ${DB_PORT:-5432}
+
+      # Folders (inside container)
+      DATASET_FOLDER: /app/uploads/datasets
+      PROFILE_FOLDER: /app/uploads/profiles
+
+      # Debug / reload already handled in main.py, but these don't hurt
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
+      PYTHONUNBUFFERED: 1
+      # Redundant but OK if you want:
+      PYTHONPATH: /app/src
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      # 👇 Critical: mount your code so you DON'T rebuild every change
+      - .:/app
+      - ./uploads/datasets:/app/uploads/datasets
+      - ./uploads/profiles:/app/uploads/profiles
+
+    restart: unless-stopped
+  frontend:
+    build:
+      context: ./src/web
+      dockerfile: Dockerfile
+    container_name: extreme_xp_frontend
+    depends_on:
+      - backend
+    environment:
+      VITE_API_BASE_URL: http://backend:8000
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+volumes:
+  postgres_data:

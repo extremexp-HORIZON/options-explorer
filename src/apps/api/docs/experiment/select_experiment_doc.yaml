@@ -1,0 +1,31 @@
+get:
+  summary: "Select Experiment"
+  deprecated: false
+  description: "Select an experiment by its ID and log the user’s selection in the search history."
+  tags: ["Experiment"]
+  parameters:
+    - name: experiment_id
+      in: query
+      description: "The ID of the experiment to select"
+      required: true
+      example: '157'
+      schema:
+        type: string
+  responses:
+    '200':
+      description: "Experiment selection was successful and logged."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: {}
+    '400':
+      description: "Bad Request. Missing experiment ID."
+    '404':
+      description: "Not Found. The experiment with the given ID was not found."
+    '405':
+      description: "Method Not Allowed. The HTTP method is not allowed."
+    '500':
+      description: "Internal server error."
+  security:
+    - bearer: []

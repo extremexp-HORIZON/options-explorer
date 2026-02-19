@@ -1,0 +1,43 @@
+post:
+  summary: User Login
+  deprecated: false
+  description: >
+    This endpoint allows users to authenticate by providing their email and password. The password is hashed using MD5 with a salt before validation. 
+    If the credentials are correct, the system generates and returns an access token and a refresh token, which should be used for authenticated requests. 
+    If authentication fails, a 401 Unauthorized response is returned. 
+    **Security Note:** MD5 is not a secure hashing algorithm; using a stronger hashing method like bcrypt is recommended. 
+    Ensure tokens are securely stored and refreshed appropriately.
+  tags: ["User"]
+  parameters: []
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              example: "mohammad@gmail.com"
+              description: "The registered email of the user."
+            password:
+              type: string
+              example: "123456"
+              description: "The user's password (before hashing)."
+          required:
+            - email
+            - password
+  responses:
+    '200':
+      description: 'Login successful. Returns user details and authentication tokens.'
+    '400':
+      description: 'Bad Request - Invalid input data.'
+    '401':
+      description: 'Unauthorized - Incorrect email or password.'
+    '404':
+      description: 'Not Found - Resource does not exist.'
+    '405':
+      description: 'Method Not Allowed - Only POST is supported.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security: []

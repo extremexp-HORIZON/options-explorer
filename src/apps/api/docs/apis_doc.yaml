@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: ExtremeXP
+  description: ""
+  version: 1.0.0
+paths:
+  /user/login:
+    $ref: user/login_doc.yaml
+  /user/register:
+    $ref: user/register_doc.yaml
+  /user/refresh_token:
+    $ref: user/refresh_token_doc.yaml
+  /experiment/add_experiment:
+    $ref: experiment/add_experiment_doc.yaml
+  /experiment/add-uc5-dataset:
+    $ref: experiment/add_uc5_dataset_doc.yaml
+  /experiment/get_experiment:
+    $ref: experiment/get_experiment_doc.yaml
+  /experiment/add_experiment_description_type:
+    $ref: experiment/add_experiment_description_type_doc.yaml
+  /experiment/get_experiment_description_types:
+    $ref: experiment/get_experiment_description_types_doc.yaml
+  /experiment/call_mdp:
+    $ref: experiment/call_mdp_doc.yaml
+  /experiment/select_experiment:
+    $ref: experiment/select_experiment_doc.yaml
+  /experiment/get_selected_experiments:
+    $ref: experiment/get_selected_experiments_doc.yaml
+  /experiment/get_domains_with_counts:
+    $ref: experiment/get_domain_with_counts.yaml
+  /experiment/add_user_feedback:
+    $ref: experiment/add_user_feedback_doc.yaml
+components:
+  schemas: {}
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+servers:
+  - url: "http://localhost:8000"
+    description: Local development server
+  - url: "http://194.249.3.27:8000"
+    description: Production server

@@ -1,0 +1,33 @@
+post:
+  summary: Refresh Access Token
+  deprecated: false
+  description: >
+    This endpoint allows users to obtain a new access token using a valid refresh token. 
+    The request must include a valid refresh token in the Authorization header. 
+    If the refresh token is valid, a new access token is returned. 
+    If the refresh token is missing, expired, or invalid, the request will be rejected with a 401 Unauthorized error.
+  tags: ["User"]
+  parameters: []
+  responses:
+    '200':
+      description: 'Token refreshed successfully. Returns a new access token.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+                example: "eyJhbGciOiJIUzI1..."
+    '400':
+      description: 'Bad Request - Invalid input.'
+    '401':
+      description: 'Unauthorized - Invalid or expired refresh token.'
+    '404':
+      description: 'Not Found - The requested resource does not exist.'
+    '405':
+      description: 'Method Not Allowed - Only POST is supported.'
+    '500':
+      description: 'Internal Server Error - Unexpected server failure.'
+  security:
+    - bearer: []
