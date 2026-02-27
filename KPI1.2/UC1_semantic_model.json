@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/"
+  },
+  "@type": "Dataset",
+  "title": "Use Case 1 Dataset",
+  "description": "Semantic model for the UC1 dataset capturing performance metrics for algorithms and models in the relevant domain.",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Application domain (e.g., health, energy, mobility)."
+    },
+    "intent": {
+      "type": "string",
+      "description": "Purpose or goal of the dataset (e.g., prediction, classification)."
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Machine-learning or analytic algorithm used."
+    },
+    "model": {
+      "type": "string",
+      "description": "Specific model configuration or version."
+    },
+    "dataset_size_mb": {
+      "type": "number",
+      "description": "Size of the dataset in megabytes."
+    },
+    "input_channels": {
+      "type": "integer",
+      "description": "Number of input channels or features."
+    },
+    "output_channels": {
+      "type": "integer",
+      "description": "Number of output classes or predictions."
+    },
+    "accuracy": {
+      "type": "number",
+      "description": "Accuracy of the models predictions."
+    },
+    "precision": {
+      "type": "number",
+      "description": "Precision metric of the model."
+    },
+    "recall": {
+      "type": "number",
+      "description": "Recall metric of the model."
+    },
+    "latency_sec": {
+      "type": "number",
+      "description": "Inference latency in seconds."
+    },
+    "energy_consumption_watt": {
+      "type": "number",
+      "description": "Energy consumed during computation."
+    }
+  }
+}

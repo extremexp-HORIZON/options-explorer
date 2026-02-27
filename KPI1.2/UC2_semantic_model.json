@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/"
+  },
+  "@type": "Dataset",
+  "title": "Use Case 2 Dataset",
+  "description": "Semantic model for the UC2 dataset describing system-level performance and resource metrics.",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Application domain (e.g., smart-cities, industrial IoT)."
+    },
+    "intent": {
+      "type": "string",
+      "description": "Purpose of the dataset (e.g., anomaly detection, monitoring)."
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Algorithm used to process the data."
+    },
+    "model": {
+      "type": "string",
+      "description": "Model variant or configuration."
+    },
+    "average_latency_sec": {
+      "type": "number",
+      "description": "Average processing latency in seconds."
+    },
+    "cpu_usage_percent": {
+      "type": "number",
+      "description": "Average CPU utilization expressed as a percentage."
+    },
+    "memory_usage_mb": {
+      "type": "number",
+      "description": "Memory consumed in megabytes."
+    },
+    "throughput_per_sec": {
+      "type": "number",
+      "description": "Number of processed events per second."
+    },
+    "accuracy": {
+      "type": "number",
+      "description": "Overall accuracy of the system."
+    },
+    "error_rate": {
+      "type": "number",
+      "description": "Error rate (fraction of incorrect outputs)."
+    },
+    "reliability": {
+      "type": "number",
+      "description": "Reliability score representing system stability."
+    },
+    "user_feedback": {
+      "type": "number",
+      "description": "User feedback rating."
+    }
+  }
+}

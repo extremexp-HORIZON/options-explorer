@@ -1,0 +1,63 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/"
+  },
+  "@type": "Dataset",
+  "title": "Use Case 5 Dataset",
+  "description": "Semantic model for the UC5 dataset evaluating real-time detection and resource-efficiency metrics.",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Application domain (e.g., surveillance, transportation)."
+    },
+    "intent": {
+      "type": "string",
+      "description": "Purpose of the dataset (e.g., object or event detection)."
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Algorithm used for detection or classification."
+    },
+    "model": {
+      "type": "string",
+      "description": "Model variant or configuration."
+    },
+    "frame_rate_fps": {
+      "type": "number",
+      "description": "Processing frame rate in frames per second."
+    },
+    "detection_accuracy": {
+      "type": "number",
+      "description": "Proportion of correctly detected events or objects."
+    },
+    "false_positive_rate": {
+      "type": "number",
+      "description": "Proportion of false positives among detections."
+    },
+    "false_negative_rate": {
+      "type": "number",
+      "description": "Proportion of missed detections."
+    },
+    "latency_ms": {
+      "type": "number",
+      "description": "Latency per detection in milliseconds."
+    },
+    "energy_consumption_watt": {
+      "type": "number",
+      "description": "Power consumption during processing."
+    },
+    "reliability": {
+      "type": "number",
+      "description": "Reliability or uptime metric."
+    },
+    "scalability": {
+      "type": "number",
+      "description": "Scalability metric representing performance across increased load."
+    },
+    "feedback_score": {
+      "type": "number",
+      "description": "User feedback or satisfaction score."
+    }
+  }
+}

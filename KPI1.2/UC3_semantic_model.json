@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/"
+  },
+  "@type": "Dataset",
+  "title": "Use Case 3 Fire-Detection Dataset",
+  "description": "Semantic model for a public-safety dataset evaluating deep-learning models for fire and smoke detection.",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Application domain (public safety)."
+    },
+    "intent": {
+      "type": "string",
+      "description": "Intent of the dataset (fire and smoke detection)."
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Object-detection algorithm used (e.g., YOLOv5, Faster R-CNN, EfficientDet, SSD, RetinaNet, CenterNet)."
+    },
+    "model": {
+      "type": "string",
+      "description": "Specific model configuration (e.g., YOLOv5_1, FasterRCNN_1)."
+    },
+    "load_time_sec": {
+      "type": "number",
+      "description": "Time in seconds required to load the model."
+    },
+    "inference_time_sec": {
+      "type": "number",
+      "description": "Average inference time per image in seconds."
+    },
+    "detection_count": {
+      "type": "integer",
+      "description": "Number of detected fire or smoke events."
+    },
+    "efficiency": {
+      "type": "number",
+      "description": "Efficiency metric comparing detection success against processing cost."
+    },
+    "robustness": {
+      "type": "number",
+      "description": "Robustness metric indicating model resilience to noise or false alarms."
+    },
+    "feedback_rating": {
+      "type": "number",
+      "description": "Human-rated feedback score."
+    }
+  }
+}

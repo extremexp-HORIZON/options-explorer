@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/"
+  },
+  "@type": "Dataset",
+  "title": "Mobility Semi Live Processing Dataset",
+  "description": "Semantic model for a mobility dataset used for semi live processing of transportation mode inference using DBSCAN and rule-based approach.",
+  "domain": "mobility",
+  "intent": "semi live processing",
+  "algorithm": "DBSCAN and rule-based mode inference",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "The context or application domain of the dataset."
+    },
+    "intent": {
+      "type": "string",
+      "description": "The purpose or intended use of the dataset processing."
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "The algorithm or approach used for inference."
+    },
+    "model": {
+      "type": "string",
+      "description": "A configuration name representing trigger parameters."
+    },
+    "trigger_type": {
+      "type": "string",
+      "description": "The type of trigger used to initiate processing (e.g., points, time_window, stationary, safety_net)."
+    },
+    "trigger_points": {
+      "type": "number",
+      "description": "Number of data points required to trigger a segment."
+    },
+    "trigger_time_window": {
+      "type": "number",
+      "description": "Time window duration (in seconds) to trigger a segment."
+    },
+    "trigger_stationary": {
+      "type": "number",
+      "description": "Duration (in seconds) indicating stationary detection."
+    },
+    "trigger_safety_net_hours": {
+      "type": "number",
+      "description": "Time (in hours) for safety net threshold."
+    },
+    "accuracy": {
+      "type": "number",
+      "description": "Overall accuracy percentage of the inference process."
+    },
+    "segment_count_diff": {
+      "type": "integer",
+      "description": "Difference in segment counts between inferred and ground truth."
+    },
+    "mode_label_similarity": {
+      "type": "number",
+      "description": "Similarity measure between inferred and actual mode labels."
+    },
+    "structural_similarity_score": {
+      "type": "number",
+      "description": "Structural similarity score indicating shape similarity between segments."
+    },
+    "runtime_per_user_day_sec": {
+      "type": "number",
+      "description": "Runtime consumed per user per day in seconds."
+    }
+  }
+}
